@@ -20,7 +20,7 @@ use Tatum\Sdk\Containers\Enums;
  * @method static self BSC()
  * @method static self ALGO()
  */
-class ChainNft extends Enums {
+class ChainDeployNft extends Enums {
     
     protected const ETH   = 'ETH';
     protected const MATIC = 'MATIC';

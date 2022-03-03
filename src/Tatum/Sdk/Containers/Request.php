@@ -1,5 +1,5 @@
 <?php
-namespace Tatum\Sdk;
+namespace Tatum\Sdk\Containers;
 
 /**
  * Request - use Payload information to perform cURL requests to Tatum's servers
@@ -32,6 +32,7 @@ class Request {
     ];
     
     const API_RES_STATUS_CODE   = 'statusCode';
+    const API_RES_DATA          = 'data';
     const API_RES_ERROR_MESSAGE = 'message';
     
     /**
@@ -65,15 +66,11 @@ class Request {
     /**
      * Execute a payload (run a cURL request)
      * 
-     * @param \Tatum\Sdk\Payload $payload SDK Payload
+     * @param \Tatum\Sdk\Containers\Payload $payload SDK Payload
      * @throws \Exception
      * @return array
      */
-    protected function _run(Payload $payload) {
-        if (!$payload instanceof Payload) {
-            throw new Exception('Invalid payload');
-        }
-        
+    protected function _call(Payload $payload) {
         // Prepare the request URL
         $requestUrl = $this->_sdk->getApiUrl() . '/' . \Tatum\Sdk::API_VERSION . '/' . $payload->requestPath();
         
@@ -110,7 +107,7 @@ class Request {
         $headers[self::HEADER_X_API_KEY] = $this->_sdk->getApiKey();
         
         // Store the test network type
-        $headers[self::HEADER_X_TESTNET_TYPE] = $this->_sdk->getTestNet();
+        $headers[self::HEADER_X_TESTNET_TYPE] = strval($this->_sdk->getTestNet());
         
         // Prepare the cURL headers
         $curlOptions[CURLOPT_HTTPHEADER] = [];
@@ -152,7 +149,13 @@ class Request {
                     "Code {$result[self::API_RES_STATUS_CODE]}: {$result[self::API_RES_ERROR_MESSAGE]}" 
                     . (
                         $this->_sdk->getApiVerbose() 
-                            ? (PHP_EOL . "$payload") 
+                            ? (
+                                PHP_EOL . "$payload". (
+                                    isset($result[self::API_RES_DATA]) 
+                                    ? (PHP_EOL . 'Error data: ' . var_export($result[self::API_RES_DATA], true)) 
+                                    : ''
+                                )
+                            ) 
                             : ''
                     )
                 );

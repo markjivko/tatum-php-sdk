@@ -1,5 +1,5 @@
 <?php
-namespace Tatum\Sdk\Caller;
+namespace Tatum\Sdk\Callers;
 use Tatum\Sdk\Request;
 use Tatum\Sdk\Containers;
 
@@ -11,7 +11,7 @@ use Tatum\Sdk\Containers;
  * @author    Mark Jivko, https://markjivko.com
  * @license   Apache 2.0 License, http://www.apache.org/licenses/
  */
-class Bockchain {
+class Blockchain {
     
     use Containers\Caller;
     

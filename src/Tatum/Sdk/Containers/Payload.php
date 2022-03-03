@@ -1,5 +1,5 @@
 <?php
-namespace Tatum\Sdk;
+namespace Tatum\Sdk\Containers;
 
 /**
  * Payloads are an organized data store for requests; they perform no action<br/>
@@ -182,7 +182,7 @@ class Payload {
             }
         );
         
-        return Request::TYPE_GET === $this->requestType
+        return Request::TYPE_GET === $this->requestType()
             ? $data
             : json_encode($data);
     }

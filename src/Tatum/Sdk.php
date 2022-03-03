@@ -21,23 +21,23 @@ class Sdk {
     /**
      * API key
      * 
-     * @var string|null
+     * @var string
      */
-    protected $_apiKey = null;
+    protected $_apiKey;
     
     /**
-     * Test network type 
-     * 
-     * @var Enums\TestNet|null
-     */
-    protected $_apiTestNet = null;
-    
-    /**
-     * API URL
+     * API URL; default <b>Enums\ApiUrl::API_URL_EU_1()</b>
      * 
      * @var Enums\ApiUrl|null
      */
     protected $_apiUrl = null;
+    
+    /**
+     * Test network type; default <b>Enums\TestNet::ETHEREUM_ROPSTEN()</b>
+     * 
+     * @var Enums\TestNet|null
+     */
+    protected $_apiTestNet = null;
     
     /**
      * API verbose flag
@@ -56,37 +56,34 @@ class Sdk {
     /**
      * Tatum SDK
      * 
-     * @param string        $apiKey  API Key; minimum 32 characters in length
-     * @param Enums\ApiUrl  $apiUrl  (optional); API URL; default <b>null</b>
-     * @param Enums\TestNet $testNet (optional); Test network type; default <b>null</b>
-     * @param boolean       $verbose (optional); Verbose logging and exceptions; default <b>false</b>
+     * @param string $apiKey API Key, minimum 32 characters in length
+     * @throws \Exception
      */
-    public function __construct($apiKey, Enums\ApiUrl $apiUrl = null, Enums\TestNet $testNet = null, $verbose = false) {
-        $this->setApiKey($apiKey)
-            ->setApiUrl($apiUrl)
-            ->setTestNet($testNet)
-            ->setApiVerbose($verbose);
+    public function __construct($apiKey) {
+        $this->setApiKey($apiKey);
     }
     
     /**
      * Get the currently used API key
      * 
-     * @return string|null
+     * @return string
      */
     public function getApiKey() {
         return $this->_apiKey;
     }
     
     /**
-     * Update the API key; minimum 32 characters in length
+     * Set the API key; minimum 32 characters in length
      * 
-     * @param string $apiKey API key; minimum 32 characters in length
+     * @param string $apiKey API key, minimum 32 characters in length
      * @return $this
+     * @throws \Exception
      */
     public function setApiKey($apiKey) {
-        $this->_apiKey = is_string($apiKey) && strlen($apiKey)
-            ? $apiKey
-            : null;
+        if (!is_string($apiKey) || strlen($apiKey) < 32) {
+            throw new \Exception('API key must be at least 32 characters long');
+        }
+        $this->_apiKey = $apiKey;
         
         return $this;
     }
@@ -94,23 +91,19 @@ class Sdk {
     /**
      * Get the API URL
      * 
-     * @return string
+     * @return Enums\ApiUrl API URL; default <b>Enums\ApiUrl::API_URL_EU_1()</b>
      */
     public function getApiUrl() {
-        return strval(
-            null === $this->_apiUrl
-                ? Enums\ApiUrl::API_URL_EU1()
-                : $this->_apiUrl
-        );
+        return $this->_apiUrl ?? Enums\ApiUrl::API_URL_EU_1();
     }
     
     /**
      * Set the API URL
      * 
-     * @param Enums\ApiUrl|null $apiUrl API URL
+     * @param Enums\ApiUrl $apiUrl API URL
      * @return $this
      */
-    public function setApiUrl(Enums\ApiUrl $apiUrl = null) {
+    public function setApiUrl(Enums\ApiUrl $apiUrl) {
         $this->_apiUrl = $apiUrl;
         
         return $this;
@@ -119,14 +112,10 @@ class Sdk {
     /**
      * Get the test network type
      * 
-     * @return string
+     * @return Enums\TestNet Test network; default <b>Enums\TestNet::ETHEREUM_ROPSTEN()</b>
      */
     public function getTestNet() {
-        return strval(
-            null === $this->_apiTestNet
-                ? Enums\TestNet::ETHEREUM_ROPSTEN()
-                : $this->_apiTestNet
-        );
+        return $this->_apiTestNet ?? Enums\TestNet::ETHEREUM_ROPSTEN();
     }
     
     /**
@@ -135,7 +124,7 @@ class Sdk {
      * @param Enums\TestNet|null $testNet Test network type
      * @return $this
      */
-    public function setTestNet(Enums\TestNet $testNet = null) {
+    public function setTestNet(Enums\TestNet $testNet) {
         $this->_apiTestNet = $testNet;
         
         return $this;
@@ -164,7 +153,7 @@ class Sdk {
     
     /**
      * Perform an API request<br/>
-     * Pay attention to the <b>@tatum-credit</b> attribute for each request
+     * Pay attention to the <b>@tatum-credit</b> attribute for each request!
      * 
      * @return \Tatum\Sdk\Caller
      */

@@ -12,13 +12,13 @@ use Tatum\Sdk\Containers\Enums;
  * @author    Mark Jivko, https://markjivko.com
  * @license   Apache 2.0 License, http://www.apache.org/licenses/
  * 
- * @method static self API_URL_EU1()
- * @method static self API_URL_EU2()
+ * @method static self API_URL_EU_1()
+ * @method static self API_URL_US_WEST_1()
  */
 class ApiUrl extends Enums {
     
-    protected const API_URL_EU1 = 'https://api-eu1.tatum.io';
-    protected const API_URL_EU2 = 'https://api-eu2.tatum.io';
+    protected const API_URL_EU_1      = 'https://api-eu1.tatum.io';
+    protected const API_URL_US_WEST_1 = 'https://api-us-west1.tatum.io';
 }
 
 /*EOF*/

@@ -26,15 +26,13 @@ class Nft extends Store {
      * @param string $filePath       Path to file; maximum file size is <b>50MB</b>
      * @param string $ercName        ERC-721 and ERC-1155 asset metadata name
      * @param string $ercDescription ERC-721 and ERC-1155 asset metadata description
-     * @param array  $ercProperties  (optional) ERC-1155 asset metadata properties; default <b>null</b>
      * @throws \Exception
      */
-    public function __construct($filePath, $ercName, $ercDescription, $ercProperties = null) {
+    public function __construct($filePath, $ercName, $ercDescription) {
         $this
             ->setFilePath($filePath)
             ->setErcName($ercName)
-            ->setErcDescription($ercDescription)
-            ->setErcProperties($ercProperties);
+            ->setErcDescription($ercDescription);
     }
     
     /**
@@ -106,7 +104,7 @@ class Nft extends Store {
                 && !is_float($property) 
                 && !is_bool($property) 
                 && !is_string($property)) {
-                throw new Exception(
+                throw new \Exception(
                     'Properties must be an array of int, float, boolean or string values'
                 );
             }

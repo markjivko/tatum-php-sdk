@@ -1,6 +1,6 @@
 <?php
 namespace Tatum\Sdk\Request;
-use Tatum\Sdk\Request;
+use Tatum\Sdk\Containers\Request;
 use Tatum\Sdk\Payload;
 
 !class_exists('\Tatum\Sdk') && exit();
@@ -33,7 +33,7 @@ class Ipfs extends Request {
      * @return string IPFS file contents
      */
     public function get(Payload\Ipfs\Get $payload) {
-        return $this->_run($payload);
+        return $this->_call($payload);
     }
     
     /**
@@ -45,7 +45,7 @@ class Ipfs extends Request {
      * @return string IPFS file id
      */
     public function store(Payload\Ipfs\Store $payload) {
-        return $this->_run($payload);
+        return $this->_call($payload);
     }
     
     /**
@@ -57,10 +57,6 @@ class Ipfs extends Request {
      * @return string IPFS <b>metadata</b> file id
      */
     public function nft(Payload\Ipfs\Nft $payload) {
-        if (!$payload instanceof Payload\Ipfs\Nft) {
-            throw new Exception('Invalid payload');
-        }
-        
         // Upload the asset to IPFS
         $responseAsset = $this->store(
             new Payload\Ipfs\Store(

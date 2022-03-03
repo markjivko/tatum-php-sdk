@@ -1,7 +1,5 @@
 <?php
 namespace Tatum\Sdk;
-use Tatum\Sdk\Containers;
-use Tatum\Sdk\Request;
 
 /**
  * Caller
@@ -27,10 +25,10 @@ class Caller {
     /**
      * Blockchain
      * 
-     * @return \Tatum\Sdk\Caller\Bockchain
+     * @return \Tatum\Sdk\Callers\Blockchain
      */
     public function blockchain() {
-        return new Caller\Bockchain($this->_sdk);
+        return new Callers\Blockchain($this->_sdk);
     }
 }
 

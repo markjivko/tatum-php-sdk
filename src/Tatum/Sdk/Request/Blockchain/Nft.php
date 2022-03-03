@@ -1,6 +1,6 @@
 <?php
 namespace Tatum\Sdk\Request\Blockchain;
-use Tatum\Sdk\Request;
+use Tatum\Sdk\Containers\Request;
 use Tatum\Sdk\Payload;
 
 !class_exists('\Tatum\Sdk') && exit();
@@ -24,7 +24,7 @@ class Nft extends Request {
      * @return string Transaction ID
      */
     public function deploy(Payload\Blockchain\Nft\Deploy $payload) {
-        return $this->_run($payload);
+        return $this->_call($payload);
     }
     
 }

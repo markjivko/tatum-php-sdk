@@ -1,7 +1,7 @@
 <?php
 namespace Tatum\Sdk\Payload\Ipfs;
-use Tatum\Sdk\Payload;
-use Tatum\Sdk\Request;
+use Tatum\Sdk\Containers\Request;
+use Tatum\Sdk\Containers\Payload;
 
 !class_exists('\Tatum\Sdk') && exit();
 
@@ -86,7 +86,7 @@ class Get extends Payload {
     public function setId($ipfsId) {
         // Wild regex performing loose validation
         if (!is_string($ipfsId) || !preg_match('%\w{46,}%i', $ipfsId)) {
-            throw new Exception('IPFS ID must be a non-empty string (46+ chars in v0, 49+ chars in v1)');
+            throw new \Exception('IPFS ID must be a non-empty string (46+ chars in v0, 49+ chars in v1)');
         }
         
         return $this->_set(self::DATA_ID, $ipfsId);

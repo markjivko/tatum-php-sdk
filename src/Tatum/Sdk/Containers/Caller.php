@@ -25,7 +25,7 @@ trait Caller {
      */
     final public function __construct(\Tatum\Sdk $sdk) {
         if (!$sdk instanceof \Tatum\Sdk) {
-            throw new Exception('Invalid SDK instance');
+            throw new \Exception('Invalid SDK instance');
         }
         
         $this->_sdk = $sdk;

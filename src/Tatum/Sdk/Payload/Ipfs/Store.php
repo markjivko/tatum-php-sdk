@@ -1,7 +1,7 @@
 <?php
 namespace Tatum\Sdk\Payload\Ipfs;
-use Tatum\Sdk\Payload;
-use Tatum\Sdk\Request;
+use Tatum\Sdk\Containers\Payload;
+use Tatum\Sdk\Containers\Request;
 
 !class_exists('\Tatum\Sdk') && exit();
 
