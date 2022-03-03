@@ -46,6 +46,7 @@ use \Tatum\Sdk\Payload;
 $sdk = new \Tatum\Sdk('00000000-0000-0000-0000-000000000000');
 
 // Store an NFT on the IPFS
+// Pay attention to the @tatum-credit tag for each method
 $fileId = $sdk->call()->ipfs()->nft(
     new Payload\Ipfs\Nft(
         '/path/to/file.png',
@@ -60,7 +61,7 @@ $fileId = $sdk->call()->ipfs()->nft(
 
 The only entry point to the entire SDK is ``$sdk->call()``. 
 
-Each method expects a payload with an intuitive naming structure: in the above example, the ``->ipfs()->nft()`` method expects a payload instance of class ``Payload\Ipfs\Nft``.
+Each method expects a payload with an intuitive naming structure. In the above example, the ``->ipfs()->nft()`` method expects a payload instance of class ``Payload\Ipfs\Nft``.
 
 Your IDE will help you navigate through the SDK.
 
