@@ -28,7 +28,7 @@ This is an implementation of the official [Tatum API](https://tatum.io/apidoc.ph
 
 ## Compatibility
 
-The Tatum PHP SDK requires at a minimum PHP7.2.
+The Tatum PHP SDK requires at a minimum **PHP 7.2**.
 
 ## Installation
 
@@ -72,9 +72,10 @@ Your IDE will help you navigate through the SDK.
 
 ## Contributing
 
+This SDK is currently **incomplete**!
+
 Contributions to the SDK are appreciated!
 
-This SDK is currently **incomplete**. 
 Continuous efforts are made to bring it in line with the latest Tatum API.
 
 ### Issues
