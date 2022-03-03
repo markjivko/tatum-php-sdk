@@ -36,7 +36,9 @@ Simply clone this Git repository and use a PSR-4 Autoloader.
 
 ## Quick Start
 
-This example showcases how to quickly authenticate a client on the platform.
+This example showcases how to quickly upload a ERC-1155 compatible NFT to the IPFS network.
+
+Pay attention to the **@tatum-credit** used for each method call.
 
 ```php
 // Tatum Platform SDK for PHP
@@ -46,7 +48,6 @@ use \Tatum\Sdk\Payload;
 $sdk = new \Tatum\Sdk('00000000-0000-0000-0000-000000000000');
 
 // Store an NFT on the IPFS
-// Pay attention to the @tatum-credit tag for each method
 $fileId = $sdk->call()->ipfs()->nft(
     new Payload\Ipfs\Nft(
         '/path/to/file.png',
