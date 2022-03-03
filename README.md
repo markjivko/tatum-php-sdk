@@ -1,4 +1,4 @@
-# Blockchain SDK by Enjin for PHP
+# Blockchain SDK by Tatum for PHP
 
 <p align="center">
     <a href="https://tatum.io/">
