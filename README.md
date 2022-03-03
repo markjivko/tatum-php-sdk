@@ -64,15 +64,17 @@ Each method expects a payload with an intuitive naming structure: in the above e
 
 Your IDE will help you navigate through the SDK.
 
-<p align="center">
-    <a href="https://tatum.io/">
-        <img src=""/>
-    </a>
-</p>
+<a href="https://github.com/markjivko/tatum-php-sdk">
+    <img src="./assets/tatum-sdk.gif"/>
+</a>
+
 
 ## Contributing
 
 Contributions to the SDK are appreciated!
+
+This SDK is currently **incomplete**. 
+Continuous efforts are made to bring it in line with the latest Tatum API.
 
 ### Issues
 
