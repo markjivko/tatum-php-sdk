@@ -1,4 +1,4 @@
-# Blockchain SDK by Enjin for PHP
+# Blockchain SDK by Tatum for PHP
 
 <p align="center">
     <a href="https://tatum.io/">
@@ -28,7 +28,7 @@ This is an implementation of the official [Tatum API](https://tatum.io/apidoc.ph
 
 ## Compatibility
 
-The Tatum PHP SDK requires at a minimum PHP7.2.
+The Tatum PHP SDK requires at a minimum **PHP 7.2**.
 
 ## Installation
 
@@ -36,7 +36,9 @@ Simply clone this Git repository and use a PSR-4 Autoloader.
 
 ## Quick Start
 
-This example showcases how to quickly authenticate a client on the platform.
+This example showcases how to quickly upload a ERC-1155 compatible NFT to the IPFS network.
+
+Pay attention to the **@tatum-credit** used for each method call.
 
 ```php
 // Tatum Platform SDK for PHP
@@ -46,7 +48,6 @@ use \Tatum\Sdk\Payload;
 $sdk = new \Tatum\Sdk('00000000-0000-0000-0000-000000000000');
 
 // Store an NFT on the IPFS
-// Pay attention to the @tatum-credit tag for each method
 $fileId = $sdk->call()->ipfs()->nft(
     new Payload\Ipfs\Nft(
         '/path/to/file.png',
@@ -65,16 +66,17 @@ Each method expects a payload with an intuitive naming structure. In the above e
 
 Your IDE will help you navigate through the SDK.
 
-<a href="https://github.com/markjivko/tatum-php-sdk">
+<a href="https://github.com/markjivko/tatum-php-sdk/blob/main/assets/tatum-sdk.gif">
     <img src="./assets/tatum-sdk.gif"/>
 </a>
 
 
 ## Contributing
 
+This SDK is currently **incomplete**!
+
 Contributions to the SDK are appreciated!
 
-This SDK is currently **incomplete**. 
 Continuous efforts are made to bring it in line with the latest Tatum API.
 
 ### Issues
