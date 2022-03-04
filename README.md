@@ -48,15 +48,17 @@ use \Tatum\Sdk\Payload;
 $sdk = new \Tatum\Sdk('00000000-0000-0000-0000-000000000000');
 
 // Store an NFT on the IPFS
+// ERC-721 by default; properties are available for ERC-1155
 $fileId = $sdk->call()->ipfs()->nft(
-    new Payload\Ipfs\Nft(
+    (new Payload\Ipfs\Nft(
         '/path/to/file.png',
-        'Name',
-        'Description',
-        [
-            'extra' => 'values',
-        ]
-    )
+        'NFT name',
+        'NFT description'
+    ))->setErcProperties([
+        'keyA' => 123,
+        'keyB' => true,
+        'keyC' => 'string',
+    ])
 );
 ```
 
