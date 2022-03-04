@@ -64,7 +64,7 @@ $fileId = $sdk->call()->ipfs()->nft(
 
 The only entry point to the entire SDK is ``$sdk->call()``. 
 
-Each method expects a payload with an intuitive naming structure. In the above example, the ``->ipfs()->nft()`` method expects a payload instance of class ``Payload\Ipfs\Nft``.
+Each method expects a payload with an intuitive naming structure. In the above example, the ``call()->ipfs()->nft()`` method expects a payload instance of class ``Payload\Ipfs\Nft``.
 
 Your IDE will help you navigate through the SDK.
 
