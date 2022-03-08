@@ -39,6 +39,11 @@ class Request {
     const API_RES_STATUS_CODE   = 'statusCode';
     const API_RES_DATA          = 'data';
     const API_RES_ERROR_MESSAGE = 'message';
+    
+    /**
+     * Common response keys
+     */
+    const RESPONSE_TXID = 'txId';
 
     /**
      * Request API key

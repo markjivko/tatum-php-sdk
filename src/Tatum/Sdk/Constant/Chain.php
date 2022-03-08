@@ -13,6 +13,7 @@ class Chain {
 
     const ETH   = 'ETH';
     const MATIC = 'MATIC';
+    const CELO  = 'CELO';
     const KCS   = 'KCS';
     const ONE   = 'ONE';
     const KLAY  = 'KLAY';

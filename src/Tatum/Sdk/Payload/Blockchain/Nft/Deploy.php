@@ -3,7 +3,6 @@
 namespace Tatum\Sdk\Payload\Blockchain\Nft;
 
 use Tatum\Sdk\Exception\InvalidArgumentException;
-use Tatum\Sdk\Container\Request;
 use Tatum\Sdk\Container\Payload;
 use Tatum\Sdk\Enum\Payload\Blockchain\Nft\Deploy as Enum;
 
@@ -45,7 +44,10 @@ class Deploy extends Payload {
     /**
      * Payload:Blockchain:Nft:Deploy
      * 
-     * @param Enum\Chain $chain Chain to work with
+     * @param Enum\Chain $chain          Chain to work with
+     * @param string     $name           Name of NFT token; [1,100] characters long
+     * @param string     $symbol         NFT Symbol; [1,30] characters long
+     * @param string     $fromPrivateKey 64 characters long private key
      * @throws InvalidArgumentException
      */
     public function __construct(Enum\Chain $chain, $name, $symbol, $fromPrivateKey) {
@@ -137,13 +139,13 @@ class Deploy extends Payload {
      * Set the private key of Ethereum account address, from which gas for deployment of ERC721 will be paid<br/>
      * Private key, or signature Id must be present
      * 
-     * @param string $fromPrivateKey Private key length: 64+ characters
+     * @param string $fromPrivateKey Private key length; 64 characters long
      * @return $this
      * @throws InvalidArgumentException
      */
     public function setFromPrivateKey($fromPrivateKey) {
-        if (!is_string($fromPrivateKey) || strlen($fromPrivateKey) < 64) {
-            throw new InvalidArgumentException('Private key must be at least 64 characters long');
+        if (!is_string($fromPrivateKey) || 64 !== strlen($fromPrivateKey)) {
+            throw new InvalidArgumentException('Private key must be 64 characters long');
         }
 
         return $this->_set(self::DATA_FROM_PRIVATE_KEY, $fromPrivateKey);

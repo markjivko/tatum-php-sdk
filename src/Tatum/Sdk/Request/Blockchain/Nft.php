@@ -19,7 +19,7 @@ use Tatum\Sdk\Payload;
  * @throws BadMethodCallException
  */
 class Nft extends Request {
-
+    
     /**
      * Deploy an NFT smart contract
      * 
@@ -30,7 +30,32 @@ class Nft extends Request {
      * @return string Transaction ID
      */
     public function deploy(Payload\Blockchain\Nft\Deploy $payload) {
-        return $this->_call($payload);
+        $response = $this->_call($payload);
+        
+        if (!is_array($response) || !isset($response[self::RESPONSE_TXID])) {
+            throw new RemoteException('Transaction ID not provided');
+        }
+        
+        return $response[self::RESPONSE_TXID];
+    }
+    
+    /**
+     * Quickly mint an NFT using one of the prepared smart contracts
+     * 
+     * @tatum-credit 100 for FLOW, 2 otherwise
+     * @param Payload\Blockchain\Nft\MintExpress $payload Payload
+     * @throws RuntimeException
+     * @throws RemoteException
+     * @return string Transaction ID
+     */
+    public function mintExpress(Payload\Blockchain\Nft\MintExpress $payload) {
+        $response = $this->_call($payload);
+        
+        if (!is_array($response) || !isset($response[self::RESPONSE_TXID])) {
+            throw new RemoteException('Transaction ID not provided');
+        }
+        
+        return $response[self::RESPONSE_TXID];
     }
 
 }
