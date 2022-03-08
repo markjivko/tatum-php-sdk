@@ -1,19 +1,21 @@
 <?php
 
-namespace Tatum\Sdk;
+namespace Tatum\Sdk\Caller;
 
 use Tatum\Sdk\Exception\BadMethodCallException;
 use Tatum\Sdk\Exception\InvalidArgumentException;
+use Tatum\Sdk\Request;
+use Tatum\Sdk\Container;
 
 /**
- * Caller
+ * Caller:Blockchain
  * 
  * @copyright (c) 2022 Tatum.io
  * @author    Mark Jivko, https://github.com/markjivko/tatum-php-sdk
  * @license   Apache 2.0 License, http://www.apache.org/licenses/
  * @throws InvalidArgumentException
  */
-class Caller {
+class Blockchain {
 
     /**
      * @throws InvalidArgumentException
@@ -21,23 +23,13 @@ class Caller {
     use Container\Caller;
 
     /**
-     * IPFS requests
+     * NFT requests
      * 
-     * @return Request\Ipfs
+     * @return Request\Blockchain\Nft
      * @throws BadMethodCallException
      */
-    public function ipfs() {
-        return new Request\Ipfs($this->_sdk);
-    }
-
-    /**
-     * Blockchain
-     * 
-     * @return Caller\Blockchain
-     * @throws InvalidArgumentException
-     */
-    public function blockchain() {
-        return new Caller\Blockchain($this->_sdk);
+    public function nft() {
+        return new Request\Blockchain\Nft($this->_sdk);
     }
 
 }

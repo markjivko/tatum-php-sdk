@@ -1,5 +1,6 @@
 <?php
-namespace Tatum\Sdk\Containers;
+
+namespace Tatum\Sdk\Container;
 
 /**
  * Payloads are an organized data store for requests; they perform no action<br/>
@@ -7,9 +8,8 @@ namespace Tatum\Sdk\Containers;
  * Use <b>_get()</b> and <b>_set()</b> methods to interact with the data table<br/>
  * Override <b>REQUEST_*</b> class constants and <b>request*()</b> methods as needed<br/>
  * 
- * @see       https://github.com/markjivko/tatum-php-sdk
  * @copyright (c) 2022 Tatum.io
- * @author    Mark Jivko, https://markjivko.com
+ * @author    Mark Jivko, https://github.com/markjivko/tatum-php-sdk
  * @license   Apache 2.0 License, http://www.apache.org/licenses/
  */
 class Payload {
@@ -20,14 +20,14 @@ class Payload {
      * @var string
      */
     const REQUEST_TYPE = Request::TYPE_POST;
-    
+
     /**
      * Request path
      * 
      * @var string
      */
     const REQUEST_PATH = '';
-    
+
     /**
      * Result is a raw data stream<br/>
      * Defaults to <b>false</b> to JSON-decode the result
@@ -35,41 +35,46 @@ class Payload {
      * @var boolean
      */
     const REQUEST_RAW = false;
-    
+
     /**
      * Data store for this payload
      * 
      * @var array
      */
     protected $_data;
-    
+
     /**
      * List of extra headers to append <b>after</b> requestHeaders() is called
      * 
      * @var array
      */
     protected $_extraHeaders = [];
-    
+
     /**
      * Common headers
      */
     const HEADER_CONTENT_TYPE = 'Content-Type';
-    
+
     /**
-     * String typecasting
+     * Describe the payload<br/>
+     * Limit the request data output to 512 characters
      * 
      * @return string
      */
-    public function __toString() {
+    final public function __toString() {
         return str_replace(
-                ['Tatum\Sdk\\', '\\'], 
-                ['', '-'], 
+                ['Tatum\Sdk\\Payload\\', '\\'],
+                ['', '-'],
                 static::class
             )
-            . ': ' . $this->requestPath() 
-            . ', ' . print_r($this->requestData(), true);
+            . PHP_EOL . '    P: /' . $this->requestPath()
+            . PHP_EOL . '    D: ' . substr(
+                print_r($this->requestData(), true), 
+                0,
+                512
+            );
     }
-    
+
     /**
      * Data store getter
      * 
@@ -78,12 +83,12 @@ class Payload {
      */
     final protected function _get($key) {
         $this->_init();
-        
+
         return array_key_exists($key, $this->_data)
             ? $this->_data[$key]
             : null;
     }
-    
+
     /**
      * Data store setter
      * 
@@ -93,14 +98,14 @@ class Payload {
      */
     final protected function _set($key, $value) {
         $this->_init();
-        
+
         if (array_key_exists($key, $this->_data)) {
             $this->_data[$key] = $value;
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Initialize the data store
      */
@@ -113,7 +118,7 @@ class Payload {
             }
         }
     }
-    
+
     /**
      * Get the current request type
      * 
@@ -124,7 +129,7 @@ class Payload {
             ? static::REQUEST_TYPE
             : Request::TYPE_POST;
     }
-    
+
     /**
      * Whether to return the result as raw data stream (no JSON decoding)
      * 
@@ -133,7 +138,7 @@ class Payload {
     final public function requestRaw() {
         return !!static::REQUEST_RAW;
     }
-    
+
     /**
      * Get the request headers<br/>
      * Set the content-type to JSON
@@ -145,7 +150,7 @@ class Payload {
             self::HEADER_CONTENT_TYPE => 'application/json',
         ];
     }
-    
+
     /**
      * Get extra request headers
      * 
@@ -156,7 +161,7 @@ class Payload {
             ? $this->_extraHeaders
             : [];
     }
-    
+
     /**
      * Get the request URL path
      * 
@@ -165,7 +170,7 @@ class Payload {
     public function requestPath() {
         return static::REQUEST_PATH;
     }
-    
+
     /**
      * Get the request data<br/>
      * Pass the non-null data as such for GET requests
@@ -181,11 +186,12 @@ class Payload {
                 return null !== $item;
             }
         );
-        
+
         return Request::TYPE_GET === $this->requestType()
             ? $data
             : json_encode($data);
     }
+
 }
 
 /* EOF */
